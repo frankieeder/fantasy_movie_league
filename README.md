@@ -1,9 +1,3 @@
-# fantasy_movie_league
-An object-oriented version of the knapsack problem, fantasy_movie_league parses 
-third-party box-office projections and computes the best Fantasy Movie League 
-cineplex for a given week using those projections, according to Fantasy Movie 
-League rules (<https://fantasymovieleague.com/howtoplay>).
-
 CONTENTS OF THIS FILE
 ---------------------
 
@@ -15,7 +9,7 @@ CONTENTS OF THIS FILE
 INTRODUCTION
 ------------
 
-An object-oriented version of the knapsack problem, fantasy_movie_league parses third-party box-office projections and computes the best Fantasy Movie League bracket for a given week.
+An object-oriented version of the knapsack problem, fantasy_movie_league parses third-party box-office projections and computes the highest-earning Fantasy Movie League bracket for a given week.
 
 Fantasy Movie League rules can be found here: https://fantasymovieleague.com/howtoplay
 
