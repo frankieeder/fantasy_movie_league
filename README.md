@@ -25,5 +25,5 @@ QUICK START
 
 In Terminal, run either all_weeks.py (which runs all sidecar files), or one of the sidecar files to compute the best bracket for the specific week to which that sidecar file corresponds.
 
-To add a new week, run new_week.py and input the necessary strings. This will also add the new week you make to all_weeks.py
+To add and run a new week sidecar file, run new_week.py and input the necessary strings. This will also add the new week you make to all_weeks.py
 
