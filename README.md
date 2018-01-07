@@ -27,8 +27,3 @@ In Terminal, run either all_weeks.py (which runs all sidecar files), or one of t
 
 To add a new week, run new_week.py and input the necessary strings. This will also add the new week you make to all_weeks.py
 
-
-Raw strings from Fantasy Movie League Insider, Box Office Report, and the Fantasy
-Movie League are located in the files that accompany fml.py, the primary code file.
-Accompanying files each correspond to a week, formatted as <year>_<quarter>_<week>.py
-Running a file will parse and compute the best cineplex (predictions) for that week.
