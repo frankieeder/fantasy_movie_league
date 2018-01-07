@@ -1,4 +1,4 @@
-from fml import *
+import fml
 ###########
 # WEEK 11 #
 ###########

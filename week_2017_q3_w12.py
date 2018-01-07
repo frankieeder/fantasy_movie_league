@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ###########
 # WEEK 12 #
 ###########
 
-WEEK_12_PRICES_RAW = """
+PRICES_RAW = """
 FRI: Justice League - FRI ONLY
 FB$636
 UNAVAILABLESCREENS LOCKED
@@ -50,7 +50,7 @@ Three Billboards Outside Ebbing, Missouri
 +
 FB$8"""
 
-WEEK_12_FML_RAW = """"Justice League" (Friday) - $58.1 million
+FML_RAW = """"Justice League" (Friday) - $58.1 million
 
 "Justice League" (Saturday) - $41.1 million
 
@@ -80,7 +80,7 @@ WEEK_12_FML_RAW = """"Justice League" (Friday) - $58.1 million
 
 "Geostorm" - $721,000"""
 
-WEEK_12_BOR_RAW = """Film (Distributor)	Weekend
+BOR_RAW = """Film (Distributor)	Weekend
 Gross	Total
 Gross	%
 Change	Week
@@ -96,8 +96,8 @@ Change	Week
 9	Three Billboards Outside
 Ebbing, Missouri (Fox Searchlight)	$1.3 M	$1.7 M	+304%	2
 10	Jigsaw (Lionsgate)	$1.2 M	$36.6 M	-65%	4"""
-WEEK_12_PRICES, \
-WEEK_12_FML_PROJECTIONS, \
-WEEK_12_FML_BRACKET, \
-WEEK_12_BOR_PROJECTIONS, \
-WEEK_12_BOR_BRACKET = exec_raw(12, WEEK_12_PRICES_RAW, WEEK_12_BOR_RAW, WEEK_12_FML_RAW)
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(12, PRICES_RAW, BOR_RAW, FML_RAW)

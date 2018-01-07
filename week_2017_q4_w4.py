@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ##########
 # WEEK 2 #
 ##########
 
-WEEK_4_PRICES_RAW = """
+PRICES_RAW = """
 STAR WARS: THE LAST JEDI
 +FB$815
 UNAVAILABLE
@@ -91,7 +91,7 @@ SCREENS LOCKED
 BEST OF THE REST
 +FB$15"""
 
-WEEK_4_FML_RAW = """""Star Wars: The Last Jedi" - $134 million
+FML_RAW = """""Star Wars: The Last Jedi" - $134 million
 
 "Jumanji: Welcome to the Jungle" - $46.9 million
 
@@ -123,7 +123,7 @@ Best of the Rest - $1.9 million
 
 """
 
-WEEK_4_BOR_RAW = """Film (Distributor)	Weekend
+BOR_RAW = """Film (Distributor)	Weekend
 Gross	Total
 Gross	%
 Change	Week
@@ -145,8 +145,8 @@ Change	Week
 14	Justice League (Warner Bros.)	$2.8 M	$224.6 M	-35%	6"""
 
 
-WEEK_4_PRICES, \
-WEEK_4_FML_PROJECTIONS, \
-WEEK_4_FML_BRACKET, \
-WEEK_4_BOR_PROJECTIONS, \
-WEEK_4_BOR_BRACKET = exec_raw(4, WEEK_4_PRICES_RAW, WEEK_4_BOR_RAW, WEEK_4_FML_RAW)
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(4, PRICES_RAW, BOR_RAW, FML_RAW)

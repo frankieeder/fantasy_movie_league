@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ###########
 # WEEK 13 #
 ###########
 
-WEEK_13_PRICES_RAW = """
+PRICES_RAW = """
 Coco
 +
 FB$716
@@ -50,7 +50,7 @@ UNAVAILABLESCREENS LOCKED
 Loving Vincent
 FB$6"""
 
-WEEK_13_FML_RAW = """"Coco" - $54.1 million
+FML_RAW = """"Coco" - $54.1 million
 
 "Justice League" - $41.6 million
 
@@ -82,7 +82,7 @@ WEEK_13_FML_RAW = """"Coco" - $54.1 million
 
 """
 
-WEEK_13_BOR_RAW = """Film (Distributor)	Weekend
+BOR_RAW = """Film (Distributor)	Weekend
 Gross	Total
 Gross	%
 Change	Week
@@ -102,8 +102,8 @@ Ebbing, Missouri (Fox Searchlight)	$3.9 M	$6.8 M	+254%	3
 12	The Man Who Invented Christmas
 (Bleecker Street)	$1.9 M	$2.5 M	NEW	1"""
 
-WEEK_13_PRICES, \
-WEEK_13_FML_PROJECTIONS, \
-WEEK_13_FML_BRACKET, \
-WEEK_13_BOR_PROJECTIONS, \
-WEEK_13_BOR_BRACKET = exec_raw(13, WEEK_13_PRICES_RAW, WEEK_13_BOR_RAW, WEEK_13_FML_RAW)
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(13, PRICES_RAW, BOR_RAW, FML_RAW)

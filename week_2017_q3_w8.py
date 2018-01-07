@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ###############
 # WEEK 8 TEST #
 ###############
 
-WEEK_8_PRICES_RAW = """
+PRICES_RAW = """
 Boo 2!
 FB$411
 UNAVAILABLESCREENS LOCKED
@@ -50,7 +50,7 @@ Victoria and Abdul
 +
 FB$31"""
 
-WEEK_8_ACTUAL_FML_RAW = """"Boo 2!" - $21.226953 million
+ACTUAL_FML_RAW = """"Boo 2!" - $21.226953 million
 
 "Happy Death Day" - $9.363415 million
 
@@ -79,9 +79,10 @@ WEEK_8_ACTUAL_FML_RAW = """"Boo 2!" - $21.226953 million
 "My Little Pony: The Movie" - $2.027064 million
 
 "Victoria and Abdul" - $2.126115 million"""
-WEEK_8_PRICES = Prices(8, WEEK_8_PRICES_RAW)
-#print(WEEK_8_PRICES)
-WEEK_8_ACTUAL_FML_PROJECTIONS = FML_Projections(8, WEEK_8_ACTUAL_FML_RAW)
-#print(WEEK_8_ACTUAL_FML_PROJECTIONS)
-WEEK_8_BRACKET = best_bracket(WEEK_8_PRICES, WEEK_8_ACTUAL_FML_PROJECTIONS)
-#print(WEEK_8_BRACKET)
+
+PRICES = fml.Prices(8, PRICES_RAW)
+#print(PRICES)
+ACTUAL_FML_EARNINGS = fml.FML_Projections(8, ACTUAL_FML_RAW)
+#print(ACTUAL_FML_PROJECTIONS)
+BRACKET = fml.best_bracket(PRICES, ACTUAL_FML_EARNINGS)
+#print(BRACKET)

@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ##########
 # WEEK 2 #
 ##########
 
-WEEK_2_PRICES_RAW = """
+PRICES_RAW = """
 Coco
 FB$390
 UNAVAILABLESCREENS LOCKED
@@ -49,7 +49,7 @@ UNAVAILABLESCREENS LOCKED
 Darkest Hour
 FB$13"""
 
-WEEK_2_FML_RAW = """"Coco" - $18.3 million
+FML_RAW = """"Coco" - $18.3 million
 "Justice League" - $8.2 million
 "Wonder" - $7.6 million
 "Thor: Ragnarok" - $6.5 million
@@ -65,7 +65,7 @@ WEEK_2_FML_RAW = """"Coco" - $18.3 million
 "Roman J. Israel, Esq." - $956,000
 "Darkest Hour" - $667,000"""
 
-WEEK_2_BOR_RAW = """Film (Distributor)	Weekend
+BOR_RAW = """Film (Distributor)	Weekend
 Gross	Total
 Gross	%
 Change	Week
@@ -84,8 +84,8 @@ Ebbing, Missouri (Fox Searchlight)	$3.8 M	$19.4 M	-14%	5
 11	The Star (Sony / AFFIRM)	$3.4 M	$31.9 M	-17%	4
 12	A Bad Moms Christmas (STXfilms)	$2.6 M	$68.7 M	-23%	6"""
 
-WEEK_2_PRICES, \
-WEEK_2_FML_PROJECTIONS, \
-WEEK_2_FML_BRACKET, \
-WEEK_2_BOR_PROJECTIONS, \
-WEEK_2_BOR_BRACKET = exec_raw(2, WEEK_2_PRICES_RAW, WEEK_2_BOR_RAW, WEEK_2_FML_RAW)
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(2, PRICES_RAW, BOR_RAW, FML_RAW)

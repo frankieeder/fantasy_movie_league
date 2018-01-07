@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ###########
 # WEEK 13 #
 ###########
 
-WEEK_1_PRICES_RAW = """
+PRICES_RAW = """
 Coco
 +
 FB$417
@@ -50,7 +50,7 @@ UNAVAILABLESCREENS LOCKED
 Wonder Wheel
 FB$6"""
 
-WEEK_1_FML_RAW = """"Coco" - $25.2 million
+FML_RAW = """"Coco" - $25.2 million
 
 "Justice League" - $16.8 million
 
@@ -82,7 +82,7 @@ WEEK_1_FML_RAW = """"Coco" - $25.2 million
 
 """
 
-WEEK_1_BOR_RAW = """Film (Distributor)	Weekend
+BOR_RAW = """Film (Distributor)	Weekend
 Gross	Total
 Gross	%
 Change	Week
@@ -100,8 +100,8 @@ Ebbing, Missouri (Fox Searchlight)	$5.0 M	$14.1 M	+14%	4
 10	A Bad Moms Christmas (STXfilms)	$2.7 M	$64.0 M	-45%	5
 11	Roman J. Israel, Esq. (Sony / Columbia)	$2.4 M	$10.0 M	-46%	3"""
 
-WEEK_1_PRICES, \
-WEEK_1_FML_PROJECTIONS, \
-WEEK_1_FML_BRACKET, \
-WEEK_1_BOR_PROJECTIONS, \
-WEEK_1_BOR_BRACKET = exec_raw(1, WEEK_1_PRICES_RAW, WEEK_1_BOR_RAW, WEEK_1_FML_RAW)
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(1, PRICES_RAW, BOR_RAW, FML_RAW)

@@ -32,23 +32,23 @@ bor_projections = '\n'.join(bor_projections)
 file_name = "week_{0}_q{1}_w{2}.py".format(year, quarter, week)
 
 contents = \
-"""from fml import *
+"""import fml
 
-# {4}, QUARTER {5}, WEEK {0} #
+# {0}, QUARTER {1}, WEEK {2} #
 
-WEEK_{0}_PRICES_RAW = \"\"\"{1}\"\"\"
+PRICES_RAW = \"\"\"{3}\"\"\"
 
-WEEK_{0}_FML_RAW = \"\"\"{2}\"\"\"
+FML_RAW = \"\"\"{4}\"\"\"
 
-WEEK_{0}_BOR_RAW = \"\"\"{3}\"\"\"
+BOR_RAW = \"\"\"{5}\"\"\"
 
 
-WEEK_{0}_PRICES, \\
-WEEK_{0}_FML_PROJECTIONS, \\
-WEEK_{0}_FML_BRACKET, \\
-WEEK_{0}_BOR_PROJECTIONS, \\
-WEEK_{0}_BOR_BRACKET = exec_raw({0}, WEEK_{0}_PRICES_RAW, WEEK_{0}_BOR_RAW, WEEK_{0}_FML_RAW)
-""".format(week, prices, fml_projections, bor_projections, year, quarter)
+PRICES, \\
+FML_PROJECTIONS, \\
+FML_BRACKET, \\
+BOR_PROJECTIONS, \\
+BOR_BRACKET = fml.exec_raw({0}, PRICES_RAW, BOR_RAW, FML_RAW)
+""".format(year, quarter, week, prices, fml_projections, bor_projections)
 
 lines = contents.split("\n")
 
@@ -60,6 +60,13 @@ for line in lines:
 
 #remove name file extension
 file_name = file_name[:-3]
+import_line = "import " + file_name
 
-all_weeks = open("all_weeks.py", "a")
-all_weeks.write("from " + file_name + " import *\n")
+with open('all_weeks.py', 'r') as content_file:
+    content = content_file.read()
+
+if import_line not in content:
+    all_weeks = open("all_weeks.py", "a")
+    all_weeks.write(import_line + "\n")
+
+exec(import_line)

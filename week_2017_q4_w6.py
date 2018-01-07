@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ##########
 # WEEK 2 #
 ##########
 
-WEEK_6_PRICES_RAW = """
+PRICES_RAW = """
 JUMANJI: WELCOME TO THE JUNGLE
 +FB$369
 UNAVAILABLE
@@ -91,7 +91,7 @@ SCREENS LOCKED
 WONDER
 +FB$24"""
 
-WEEK_6_FML_RAW = """""Jumanji: Welcome to the Jungle" - $29.1 million
+FML_RAW = """""Jumanji: Welcome to the Jungle" - $29.1 million
 
 "Star Wars: The Last Jedi" - $24.8 million
 
@@ -121,7 +121,7 @@ WEEK_6_FML_RAW = """""Jumanji: Welcome to the Jungle" - $29.1 million
 
 "Wonder" - $2 million"""
 
-WEEK_6_BOR_RAW = """Film (Distributor)	Weekend
+BOR_RAW = """Film (Distributor)	Weekend
 Gross	Total
 Gross	%
 Change	Week
@@ -142,8 +142,8 @@ Change	Week
 13	Downsizing (Paramount)	$2.2 M	$23.0 M	-53%	3"""
 
 
-WEEK_6_PRICES, \
-WEEK_6_FML_PROJECTIONS, \
-WEEK_6_FML_BRACKET, \
-WEEK_6_BOR_PROJECTIONS, \
-WEEK_6_BOR_BRACKET = exec_raw(6, WEEK_6_PRICES_RAW, WEEK_6_BOR_RAW, WEEK_6_FML_RAW)
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(6, PRICES_RAW, BOR_RAW, FML_RAW)

@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ##########
 # WEEK 2 #
 ##########
 
-WEEK_3_PRICES_RAW = """
+PRICES_RAW = """
 FRI - STAR WARS: THE LAST JEDI - FRI ONLY
 +FB$823
 UNAVAILABLE
@@ -94,7 +94,7 @@ UNAVAILABLE
 
 SCREENS LOCKED"""
 
-WEEK_3_FML_RAW = """"Star Wars: The Last Jedi" (Friday) - $103.2 million
+FML_RAW = """"Star Wars: The Last Jedi" (Friday) - $103.2 million
 
 "Star Wars: The Last Jedi" (Saturday) - $63.8 million
 
@@ -124,7 +124,7 @@ WEEK_3_FML_RAW = """"Star Wars: The Last Jedi" (Friday) - $103.2 million
 
 "Three Billboards Outside Ebbing, Missouri" - $1.7 million"""
 
-WEEK_3_BOR_RAW = """Film (Distributor)	Weekend
+BOR_RAW = """Film (Distributor)	Weekend
 Gross	Total
 Gross	%
 Change	Week
@@ -143,8 +143,8 @@ Change	Week
 12	The Star (Sony / AFFIRM)	$2.0 M	$35.6 M	-46%	5"""
 
 
-WEEK_3_PRICES, \
-WEEK_3_FML_PROJECTIONS, \
-WEEK_3_FML_BRACKET, \
-WEEK_3_BOR_PROJECTIONS, \
-WEEK_3_BOR_BRACKET = exec_raw(3, WEEK_3_PRICES_RAW, WEEK_3_BOR_RAW, WEEK_3_FML_RAW)
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(3, PRICES_RAW, BOR_RAW, FML_RAW)

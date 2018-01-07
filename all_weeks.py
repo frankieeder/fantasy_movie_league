@@ -1,11 +1,11 @@
 from fml import *
-from week_2017_q3_w8 import *
-from week_2017_q3_w11 import *
-from week_2017_q3_w12 import *
-from week_2017_q3_w13 import *
-from week_2017_q4_w1 import *
-from week_2017_q4_w2 import *
-from week_2017_q4_w3 import *
-from week_2017_q4_w4 import *
-from week_2017_q4_w5 import *
-from week_2017_q4_w6 import *
+import week_2017_q3_w8
+import week_2017_q3_w11
+import week_2017_q3_w12
+import week_2017_q3_w13
+import week_2017_q4_w1
+import week_2017_q4_w2
+import week_2017_q4_w3
+import week_2017_q4_w4
+import week_2017_q4_w5
+import week_2017_q4_w6

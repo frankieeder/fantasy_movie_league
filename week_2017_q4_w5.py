@@ -1,9 +1,9 @@
-from fml import *
+import fml
 ##########
 # WEEK 2 #
 ##########
 
-WEEK_5_PRICES_RAW = """
+PRICES_RAW = """
 STAR WARS: THE LAST JEDI
 +FB$610
 UNAVAILABLE
@@ -91,7 +91,7 @@ SCREENS LOCKED
 LADY BIRD
 +FB$20"""
 
-WEEK_5_FML_RAW = """""Star Wars: The Last Jedi" - $77.8 million
+FML_RAW = """""Star Wars: The Last Jedi" - $77.8 million
 
 "Jumanji: Welcome to the Jungle" - $58 million
 
@@ -121,7 +121,7 @@ WEEK_5_FML_RAW = """""Star Wars: The Last Jedi" - $77.8 million
 
 "Lady Bird" - $1.8 million"""
 
-WEEK_5_BOR_RAW = """Film (Distributor)	Weekend
+BOR_RAW = """Film (Distributor)	Weekend
 Gross	Total
 Gross	%
 Change	Week
@@ -141,8 +141,8 @@ Change	Week
 12	Wonder (Lionsgate)	$3.0 M	$120.8 M	+11%	7"""
 
 
-WEEK_5_PRICES, \
-WEEK_5_FML_PROJECTIONS, \
-WEEK_5_FML_BRACKET, \
-WEEK_5_BOR_PROJECTIONS, \
-WEEK_5_BOR_BRACKET = exec_raw(5, WEEK_5_PRICES_RAW, WEEK_5_BOR_RAW, WEEK_5_FML_RAW)
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(5, PRICES_RAW, BOR_RAW, FML_RAW)
