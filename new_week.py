@@ -1,3 +1,13 @@
+"""To add and run a new week sidecar file, run new_week.py and input the necessary strings. These include:
+ * Year: A string representing the year that this quarter began
+ * Quarter: A string representing the quarter that this week is from
+ * Week: A string representing the week to calculate projections for
+ * Prices: The string created by highlighting and copying the entire price interface of Fantasy Movie League
+ * FML Projections: The string created by highlighting and copying all the name-price pairs listed on FML Insider
+ * BOR Projections: The string created by highlighting and copying the entire table of predictions posted on Box Office Report
+This will also add the new week you make to all_weeks.py for later use.
+"""
+
 year = input("Year? ")
 quarter = input("Quarter? ")
 week = input("Week? ")
