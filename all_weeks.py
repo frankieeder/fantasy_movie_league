@@ -9,3 +9,4 @@ import week_2017_q4_w3
 import week_2017_q4_w4
 import week_2017_q4_w5
 import week_2017_q4_w6
+import week_2017_q4_w7

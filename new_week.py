@@ -57,7 +57,7 @@ PRICES, \\
 FML_PROJECTIONS, \\
 FML_BRACKET, \\
 BOR_PROJECTIONS, \\
-BOR_BRACKET = fml.exec_raw({0}, PRICES_RAW, BOR_RAW, FML_RAW)
+BOR_BRACKET = fml.exec_raw({2}, PRICES_RAW, BOR_RAW, FML_RAW)
 """.format(year, quarter, week, prices, fml_projections, bor_projections)
 
 lines = contents.split("\n")

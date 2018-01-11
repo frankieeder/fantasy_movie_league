@@ -1,7 +1,10 @@
+import re
+
 NUM_SCREENS = 8
 STARTING_BUDGET = 1000
 MAX_INDEX_CHARACTERS = 4
 GLOBAL_DEFAULT_SEPARATOR = "|"
+EMPTY_MOVIE_COST = -2000000
 
 class Movie:
     """A Movie has a name and a week_id,since some Movies may appear in multiple weeks.
@@ -46,7 +49,6 @@ class Bracket:
     def list(self):
         return self.movies
 
-
 class Projection:
     """Projections store names of movies and their corresponding box-office
     projections.
@@ -90,7 +92,7 @@ class ProjectionSet:
 
     def __getitem__(self, movie):
         if movie is EMPTY_MOVIE:
-            return -2000000
+            return EMPTY_MOVIE_COST
         if type(movie) is int:
             return self.projections[movie]
         if type(movie) is Movie:
@@ -98,8 +100,7 @@ class ProjectionSet:
         for proj in self.projections:
             if proj.name == movie:
                 return proj.projection
-        raise KeyError
-
+        raise KeyError('Movie "{0}" not in this ProjectionSet'.format(movie))
 
 class BOR_Projections(ProjectionSet):
     """BOR_Projections is a ProjectionSet of Projections made from Box Office
@@ -260,10 +261,12 @@ class Prices:
         return [Price(*pair) for pair in pairs]
 
     def __getitem__(self, movie):
+        if movie is EMPTY_MOVIE:
+            return 0
         for price in self.prices:
             if movie.name == price.name:
                 return price.price
-        raise KeyError
+        raise KeyError("Movie '{0}' not in these Week {1} prices.".format(movie, self.week_id))
 
     def __repr__(self, separator=GLOBAL_DEFAULT_SEPARATOR):
         return "\n".join(["Prices - Week {0} {1}".format(self.week_id, self.id_string)] + make_lines(self, "prices", separator))
@@ -277,14 +280,7 @@ class Prices:
         string change with each week and as I work with new websites.
         """
         #parse lines
-        lines = []
-        while len(string) > 0:
-            line = ""
-            string = string[1:]
-            while len(string) > 0 and string[0] != "\n" and string[0] != "\t":
-                line += string[0]
-                string = string[1:]
-            lines.append(line)
+        lines = re.split("\n|\t", string)
         #remove extra lines
         index = 0
         while index < len(lines):
@@ -329,7 +325,38 @@ class Prices:
         return pairs
 
 def best_bracket(prices, projections, budget=STARTING_BUDGET, available_slots=NUM_SCREENS):
-    """returns the bracket of size available_slots with the highest projected weekend earnings"""
+    """Returns the bracket of size available_slots with the highest projected weekend earnings.
+    >>> best_bracket(week_2017_q3_w8.PRICES, week_2017_q3_w8.ACTUAL_FML_EARNINGS)
+    Bracket - Week 8 FML
+    0   |Movie: Geostorm
+    1   |Movie: Geostorm
+    2   |Movie: Geostorm
+    3   |Movie: Geostorm
+    4   |Movie: Geostorm
+    5   |Movie: Victoria And Abdul
+    6   |Movie: Victoria And Abdul
+    7   |Movie:
+    >>> best_bracket(week_2017_q4_w6.PRICES, week_2017_q4_w6.FML_PROJECTIONS)
+    Bracket - Week 6 FML
+    0   |Movie: Jumanji: Welcome To The Jungle
+    1   |Movie: Jumanji: Welcome To The Jungle
+    2   |Movie: Coco
+    3   |Movie: Coco
+    4   |Movie: Coco
+    5   |Movie: Coco
+    6   |Movie: Downsizing
+    7   |Movie: Downsizing
+    >>> best_bracket(week_2017_q4_w6.PRICES, week_2017_q4_w6.BOR_PROJECTIONS)
+    Bracket - Week 6 BOR
+    0   |Movie: Jumanji: Welcome To The Jungle
+    1   |Movie: Jumanji: Welcome To The Jungle
+    2   |Movie: Darkest Hour
+    3   |Movie: Darkest Hour
+    4   |Movie: Darkest Hour
+    5   |Movie: Darkest Hour
+    6   |Movie: Wonder
+    7   |Movie: Wonder
+    """
     cache = {}
     options = prices.make_options().list()
     def best_helper(options, budget, available_slots):
@@ -349,7 +376,14 @@ def best_bracket(prices, projections, budget=STARTING_BUDGET, available_slots=NU
 
 def calc_total(bracket, projections, available_slots=NUM_SCREENS):
     """Calculates the total value of bracket given projections and with
-    available_slots number of remaining slots in the Bracket (Cineplex).
+    available_slots number of remaining slots in the Bracket (Cineplex). Accounts
+    for empty slot earning deduction.
+    >>> calc_total(week_2017_q3_w8.REAL_BRACKET, week_2017_q3_w8.ACTUAL_FML_EARNINGS)
+    70789110.0
+    >>> calc_total(week_2017_q3_w8.FML_BRACKET, week_2017_q3_w8.FML_PROJECTIONS)
+    67700000.0
+    >>> calc_total(week_2017_q4_w1.FML_BRACKET, week_2017_q4_w1.FML_PROJECTIONS)
+    61601000.0
     """
     bracket = bracket.list()
     while len(bracket) < available_slots:
@@ -359,8 +393,14 @@ def calc_total(bracket, projections, available_slots=NUM_SCREENS):
 
 def calc_price(bracket, prices):
     """Calculates the total price of bracket given corresponding prices.
+    >>> calc_price(week_2017_q3_w8.FML_BRACKET, week_2017_q3_w8.PRICES)
+    1000
+    >>> calc_price(week_2017_q3_w8.REAL_BRACKET, week_2017_q3_w8.PRICES)
+    992
+    >>> calc_price(week_2017_q4_w6.FML_BRACKET, week_2017_q4_w6.PRICES)
+    998
     """
-    return sum([prices[movie] for movie in bracket])
+    return sum((prices[movie] for movie in bracket))
 
 def make_lines(obj, iterable_name, separator=GLOBAL_DEFAULT_SEPARATOR):
     """Make_lines takes in an Object obj, a String iterable_name, and String
@@ -411,3 +451,6 @@ def exec_raw(week, raw_prices, raw_bor_projections, raw_fml_projections):
 
     print("#############################################################")
     return prices, fml_projections, fml_bracket, bor_projections, bor_bracket
+
+if __name__ == "__main__":
+    from all_weeks import *

@@ -1,0 +1,17 @@
+import fml
+
+# 1, QUARTER 1, WEEK 1 #
+
+PRICES_RAW = """"""
+
+FML_RAW = """"""
+
+BOR_RAW = """"""
+
+
+PRICES, \
+FML_PROJECTIONS, \
+FML_BRACKET, \
+BOR_PROJECTIONS, \
+BOR_BRACKET = fml.exec_raw(1, PRICES_RAW, BOR_RAW, FML_RAW)
+
