@@ -117,13 +117,14 @@ class BOR_Projections(ProjectionSet):
         (if necessary) is the first element in self.projections
         """
         if "(Friday)" in fml_projections.projections[0].name:
-            days = [fml_projections.projections[i] for i in range(3)]
-            key = days[0].name.replace(" (Friday)", "")
+            key = fml_projections.projections[0].name.replace(" (Friday)", "")
+            print(key)
+            days = [p for p in fml_projections.projections if key in p.name]
             bor = self.projections.pop(0).projection
             fml = sum([p.projection for p in days])
             ratio = bor / fml
-            for i in range(3):
-                self.projections.insert(i, Projection(days[i].name, (days[i].projection * ratio)))
+            for p in days:
+                self.projections.append(Projection(p.name, (p.projection * ratio)))
         for name in [proj.name for proj in fml_projections.projections]:
             if name not in [proj.name for proj in self.projections]:
                 self.projections.append(Projection(name, fml_projections[name]))
@@ -308,6 +309,7 @@ class Prices:
             if pair[0][:5] == "SUN: ":
                 end = pair[0].find(" - SUN ONLY")
                 pair[0] = pair[0][5:end] + " (Sunday)"
+
             #new set
             if pair[0][:6] == "FRI - ":
                 end = pair[0].find(" - FRI ONLY")
@@ -318,6 +320,9 @@ class Prices:
             if pair[0][:6] == "SUN - ":
                 end = pair[0].find(" - SUN ONLY")
                 pair[0] = pair[0][6:end] + " (Sunday)"
+            if pair[0][:6] == "MON - ":
+                end = pair[0].find(" - MON ONLY")
+                pair[0] = pair[0][6:end] + " (Monday)"
             #second
             pair[1] = int(pair[1][pair[1].find("$")+1:])
         #convert to title case
@@ -416,7 +421,7 @@ def make_lines(obj, iterable_name, separator=GLOBAL_DEFAULT_SEPARATOR):
         i += 1
     return strings
 
-def exec_raw(week, raw_prices, raw_bor_projections, raw_fml_projections):
+def exec_raw(week, raw_prices, raw_bor_projections, raw_fml_projections, prnt=True):
     """Takes a week (an int representing the week), raw_prices, bor_projections,
     and fml_projects and runs and prints the results of the projections.
     """

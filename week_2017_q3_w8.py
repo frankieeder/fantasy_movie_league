@@ -111,10 +111,10 @@ FML_RAW = """"Boo 2! A Madea Halloween" - $23.8 million
 "Victoria and Abdul" - $1.8 million"""
 
 PRICES = fml.Prices(8, PRICES_RAW)
-#print(PRICES)
+print(PRICES)
 ACTUAL_FML_EARNINGS = fml.FML_Projections(8, ACTUAL_FML_RAW)
-#print(ACTUAL_FML_PROJECTIONS)
+print(ACTUAL_FML_EARNINGS)
 REAL_BRACKET = fml.best_bracket(PRICES, ACTUAL_FML_EARNINGS)
-#print(BRACKET)
+print(REAL_BRACKET)
 FML_PROJECTIONS = fml.FML_Projections(8, FML_RAW)
 FML_BRACKET = fml.best_bracket(PRICES, FML_PROJECTIONS)
