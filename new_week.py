@@ -1,16 +1,17 @@
 """To add and run a new week sidecar file, run new_week.py and input the necessary strings. These include:
  * Year: A string representing the year that this quarter began
- * Quarter: A string representing the quarter that this week is from
- * Week: A string representing the week to calculate projections for
+ * Start and end Month and Day Values to distinguish weeks.
  * Prices: The string created by highlighting and copying the entire price interface of Fantasy Movie League
  * FML Projections: The string created by highlighting and copying all the name-price pairs listed on FML Insider
  * BOR Projections: The string created by highlighting and copying the entire table of predictions posted on Box Office Report
 This will also add the new week you make to all_weeks.py for later use.
 """
 
-year = input("Year? ")
-quarter = input("Quarter? ")
-week = input("Week? ")
+year = input("Year?: ")
+startMonth = input("Start Month #?: ")
+startDate = input("Start Day #?: ")
+endMonth = input("End Month #?: ")
+endDate = input("End Day #?: ")
 
 prices = []
 print("Prices? (terminate with a new line containing 'end')")
@@ -39,26 +40,26 @@ while True:
     bor_projections.append(line)
 bor_projections = '\n'.join(bor_projections)
 
-file_name = "week_{0}_q{1}_w{2}.py".format(year, quarter, week)
+file_name = "week_{4}__{0}_{1}__{2}_{3}.py".format(startMonth, startDate, endMonth, endDate, year)
 
 contents = \
 """import fml
 
-# {0}, QUARTER {1}, WEEK {2} #
+# {4}/{5}/{3} - {6}/{7}/{3} #
 
-PRICES_RAW = \"\"\"{3}\"\"\"
+PRICES_RAW = \"\"\"{0}\"\"\"
 
-FML_RAW = \"\"\"{4}\"\"\"
+FML_RAW = \"\"\"{1}\"\"\"
 
-BOR_RAW = \"\"\"{5}\"\"\"
+BOR_RAW = \"\"\"{2}\"\"\"
 
 
 PRICES, \\
 FML_PROJECTIONS, \\
 FML_BRACKET, \\
 BOR_PROJECTIONS, \\
-BOR_BRACKET = fml.exec_raw({2}, PRICES_RAW, BOR_RAW, FML_RAW)
-""".format(year, quarter, week, prices, fml_projections, bor_projections)
+BOR_BRACKET = fml.exec_raw({3}{4}{5}, PRICES_RAW, BOR_RAW, FML_RAW)
+""".format(prices, fml_projections, bor_projections, year, startMonth, startDate, endMonth, endDate)
 
 lines = contents.split("\n")
 
