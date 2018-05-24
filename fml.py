@@ -301,14 +301,17 @@ class Prices:
             #first
             #old set
             if pair[0][:5] == "FRI: ":
-                end = pair[0].find(" - FRI ONLY")
-                pair[0] = pair[0][5:end] + " (Friday)"
+                str = pair[0].replace(" - FRI ONLY", "").replace("FRI: ", "")
+                pair[0] = str + " (Friday)"
             if pair[0][:5] == "SAT: ":
-                end = pair[0].find(" - SAT ONLY")
-                pair[0] = pair[0][5:end] + " (Saturday)"
+                str = pair[0].replace(" - SAT ONLY", "").replace("SAT: ", "")
+                pair[0] = str + " (Saturday)"
             if pair[0][:5] == "SUN: ":
-                end = pair[0].find(" - SUN ONLY")
-                pair[0] = pair[0][5:end] + " (Sunday)"
+                str = pair[0].replace(" - SUN ONLY", "").replace("SUN: ", "")
+                pair[0] = str + " (Sunday)"
+            if pair[0][:5] == "MON: ":
+                str = pair[0].replace(" - MON ONLY", "").replace("MON: ", "")
+                pair[0] = str + " (Monday)"
 
             #new set
             if pair[0][:6] == "FRI - ":
