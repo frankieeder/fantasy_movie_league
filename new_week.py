@@ -4,7 +4,6 @@
  * Prices: The string created by highlighting and copying the entire price interface of Fantasy Movie League
  * FML Projections: The string created by highlighting and copying all the name-price pairs listed on FML Insider
  * BOR Projections: The string created by highlighting and copying the entire table of predictions posted on Box Office Report
-This will also add the new week you make to all_weeks.py for later use.
 """
 
 year = input("Year?: ")
@@ -68,16 +67,3 @@ new = open(file_name, "w+")
 for line in lines:
     new.write(line)
     new.write("\n")
-
-#remove name file extension
-file_name = file_name[:-3]
-import_line = "import " + file_name
-
-with open('all_weeks.py', 'r') as content_file:
-    content = content_file.read()
-
-if import_line not in content:
-    all_weeks = open("all_weeks.py", "a")
-    all_weeks.write(import_line + "\n")
-
-exec(import_line)

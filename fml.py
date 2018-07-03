@@ -459,6 +459,3 @@ def exec_raw(week, raw_prices, raw_bor_projections, raw_fml_projections, prnt=Tr
 
     print("#############################################################")
     return prices, fml_projections, fml_bracket, bor_projections, bor_bracket
-
-if __name__ == "__main__":
-    from all_weeks import *
