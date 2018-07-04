@@ -37,10 +37,10 @@ def IMDBResultToRow(tag):
     strings = [s for s in tag.descendants if isinstance(s, NavigableString)]
     title = header.find("a")
     title = title and title.get_text()
-    year = header.find_all("span")[1]
-    year = year and year.get_text()[1:5]
+    year = header.find("span", **{"class":"lister-item-year text-muted unbold"})
+    year = year and year.get_text().split()[-1][1:5]
     runtime = tag.find("span", **{"class":"runtime"})
-    runtime = runtime and runtime.get_text()
+    runtime = runtime and runtime.get_text()[:-4]
     genre = tag.find("span", **{"class":"genre"})
     genre = genre and genre.get_text().strip()
     imdb_rating = tag.find("strong")
