@@ -2,140 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f95700da-8aad-4c4b-9a26-ba4344564dfc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/fantasy_movie_league.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fantasy_movie_league.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/BoxOfficeMojo_data_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/BoxOfficeMojo/BoxOfficeMojo_data_scraper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=01 | January 1-3, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=02 | January 8-10, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=03 | January 15-17, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=04 | January 22-24, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=05 | January 29-31, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=06 | February 5-7, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=07 | February 12-14, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=08 | February 19-21, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=09 | February 26-28, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=10 | March 4-6, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=11 | March 11-13, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=12 | March 18-20, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=13 | March 25-27, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=14 | April 1-3, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=15 | April 8-10, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=16 | April 15-17, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=17 | April 22-24, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=18 | April 29-May 1, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=19 | May 6-8, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=20 | May 13-15, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=21 | May 20-22, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=22 | May 27-29, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=23 | June 3-5, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=24 | June 10-12, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=25 | June 17-19, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=26 | June 24-26, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=27 | July 1-3, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=28 | July 8-10, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=29 | July 15-17, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=30 | July 22-24, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=31 | July 29-31, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=32 | August 5-7, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=33 | August 12-14, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=34 | August 19-21, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=35 | August 26-28, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=36 | September 2-4, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=37 | September 9-11, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=38 | September 16-18, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=39 | September 23-25, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=40 | September 30-October 2, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=41 | October 7-9, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=42 | October 14-16, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=43 | October 21-23, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=44 | October 28-30, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=45 | November 4-6, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=46 | November 11-13, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=47 | November 18-20, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=48 | November 25-27, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=49 | December 2-4, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=50 | December 9-11, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=51 | December 16-18, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=52 | December 23-25, 2016.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2016 | wknd=53 | December 30-January 1, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=01 | January 6-8, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=02 | January 13-15, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=03 | January 20-22, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=04 | January 27-29, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=05 | February 3-5, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=06 | February 10-12, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=07 | February 17-19, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=08 | February 24-26, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=09 | March 3-5, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=10 | March 10-12, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=11 | March 17-19, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=12 | March 24-26, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=13 | March 31-April 2, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=14 | April 7-9, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=15 | April 14-16, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=16 | April 21-23, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=17 | April 28-30, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=18 | May 5-7, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=19 | May 12-14, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=20 | May 19-21, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=21 | May 26-28, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=22 | June 2-4, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=23 | June 9-11, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=24 | June 16-18, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=25 | June 23-25, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=26 | June 30-July 2, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=27 | July 7-9, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=28 | July 14-16, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=29 | July 21-23, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=30 | July 28-30, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=31 | August 4-6, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=32 | August 11-13, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=33 | August 18-20, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=34 | August 25-27, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=35 | September 1-3, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=36 | September 8-10, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=37 | September 15-17, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=38 | September 22-24, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=39 | September 29-October 1, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=40 | October 6-8, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=41 | October 13-15, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=42 | October 20-22, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=43 | October 27-29, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=44 | November 3-5, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=45 | November 10-12, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=46 | November 17-19, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=47 | November 24-26, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=48 | December 1-3, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=49 | December 8-10, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=50 | December 15-17, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=51 | December 22-24, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2017 | wknd=52 | December 29-31, 2017.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=01 | January 5-7, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=02 | January 12-14, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=03 | January 19-21, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=04 | January 26-28, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=05 | February 2-4, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=06 | February 9-11, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=07 | February 16-18, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=08 | February 23-25, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=09 | March 2-4, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=10 | March 9-11, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=11 | March 16-18, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=12 | March 23-25, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=13 | March 30-April 1, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=14 | April 6-8, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=15 | April 13-15, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=16 | April 20-22, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=17 | April 27-29, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=18 | May 4-6, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=19 | May 11-13, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=20 | May 18-20, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=21 | May 25-27, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=22 | June 1-3, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=23 | June 8-10, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=24 | June 15-17, 2018.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BoxOfficeMojo/yr=2018 | wknd=25 | June 22-24, 2018.csv" beforeDir="false" />
     </list>
     <ignored path="venv/" />
     <ignored path="data/BoxOfficeMojo/output/" />
@@ -151,20 +20,29 @@
       <file leaf-file-name="new_week.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/new_week.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="747">
+            <state relative-caret-position="562">
               <caret line="68" column="19" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BoxOfficeMojo_data_scraper.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IMDb_data_scraper.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="79">
+              <caret line="93" selection-start-line="93" selection-end-line="93" />
+              <folding>
+                <element signature="e#0#46#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BoxOfficeMojo_data_scraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/BoxOfficeMojo/BoxOfficeMojo_data_scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="31">
+              <caret line="86" selection-start-line="86" selection-end-line="90" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -181,6 +59,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>re</find>
+      <find>week_id</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,10 +74,12 @@
         <option value="$PROJECT_DIR$/data/data_scraper.py" />
         <option value="$PROJECT_DIR$/data/BoxOfficeMojo/test.py" />
         <option value="$PROJECT_DIR$/data/BoxOfficeMojo/BoxOfficeMojo_data_scraper.py" />
+        <option value="$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="1" />
     <option name="y" value="23" />
     <option name="width" value="1474" />
     <option name="height" value="956" />
@@ -227,6 +108,12 @@
               <item name="data" type="462c0819:PsiDirectoryNode" />
               <item name="BoxOfficeMojo" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="fantasy_movie_league" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fantasy_movie_league" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="IMDb" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -234,7 +121,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -255,7 +142,25 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.data_scraper">
+  <component name="RunManager" selected="Python.IMDb_data_scraper">
+    <configuration name="IMDb_data_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="fantasy_movie_league" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/IMDb" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="data_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="fantasy_movie_league" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -295,9 +200,11 @@
     <list>
       <item itemvalue="Python.data_scraper" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.IMDb_data_scraper" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.IMDb_data_scraper" />
         <item itemvalue="Python.data_scraper" />
         <item itemvalue="Python.test" />
       </list>
@@ -314,23 +221,39 @@
       <option name="presentableId" value="Default" />
       <updated>1530642808924</updated>
     </task>
+    <task id="LOCAL-00001" summary="Trying to ignore more files...">
+      <created>1530664425858</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1530664425858</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Changed scrape strategy to start by seeing what needs to be done beforehand. Broke parts of code into separate functions.">
+      <created>1530672814549</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1530672814549</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1474" height="956" extended-state="0" />
+    <frame x="1" y="23" width="1474" height="956" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.5006784" side_tool="true" weight="0.64625853" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32879817" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23744912" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23744912" />
       <window_info anchor="right" id="R Packages" />
       <window_info anchor="right" id="R Graphics" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.64625853" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49932158" visible="true" weight="0.64625853" />
       <window_info id="Favorites" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -343,17 +266,27 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Trying to ignore more files..." />
+    <MESSAGE value="Changed scrape strategy to start by seeing what needs to be done beforehand. Broke parts of code into separate functions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed scrape strategy to start by seeing what needs to be done beforehand. Broke parts of code into separate functions." />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/data/BoxOfficeMojo/BoxOfficeMojo_data_scraper.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="42" />
+          <url>file://$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py</url>
+          <line>101</line>
+          <option name="timeStamp" value="101" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="43" />
+      <option name="time" value="114" />
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="str" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/all_weeks.py">
@@ -380,29 +313,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="1663" selection-start-line="1663" selection-end-line="1663" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/BoxOfficeMojo/test.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/new_week.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="68" column="19" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
-        </state>
-      </provider>
     </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/tokenize.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -414,12 +326,68 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydevd_bundle/pydevd_exec2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/urllib/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1527">
+          <caret line="1323" selection-start-line="1323" selection-end-line="1323" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/BoxOfficeMojo/BoxOfficeMojo_data_scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
+        <state relative-caret-position="31">
+          <caret line="86" selection-start-line="86" selection-end-line="90" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_week.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="68" column="19" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/bs4/element.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="736" selection-start-line="736" selection-end-line="736" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="1663" selection-start-line="1663" selection-end-line="1663" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="310" selection-start-line="310" selection-end-line="310" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#0#46#0" expanded="true" />
           </folding>
         </state>
       </provider>

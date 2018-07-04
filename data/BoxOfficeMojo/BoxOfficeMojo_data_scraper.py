@@ -18,7 +18,7 @@ def getYears():
     return years
 
 def getWeeks(year):
-    """Finds weeks in this year tht have weekend chart results.
+    """Finds weeks in this year that have weekend chart results.
 
     :param year: year to find week numbers of weekend chart results.
     :return: an integer list of weeks in this year that have weekend chart results.
@@ -52,6 +52,16 @@ def parseTable(chart):
     rows = [rowelem.find_all('td') for rowelem in rowelems]
     data = [[elem.get_text() for elem in row] for row in rows]
     return(data)
+
+def writeTable(table, filename):
+    """Writes table to csv.
+    :param table: The table to write (should be indexed by rows then columns)
+    :param filename: The directory to write the csv to
+    :return: None
+    """
+    with open(filename, "w") as output:
+        writer = csv.writer(output, lineterminator='\n')
+        writer.writerows(table)
 
 def findYear(str):
     """Uses regex to find the integer year ID in a string, with form yr=<digit>
@@ -100,6 +110,5 @@ for year, week in weekends_to_collect:
 
     # Write data to csv
     csvfile = "./output/" + " | ".join((yr_id, wknd_id, dates)) + ".csv"
-    with open(csvfile, "w") as output:
-        writer = csv.writer(output, lineterminator='\n')
-        writer.writerows(data)
+    writeTable(data, csvfile)
+
