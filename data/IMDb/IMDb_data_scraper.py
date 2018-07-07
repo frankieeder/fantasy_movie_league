@@ -38,15 +38,16 @@ def IMDBResultToRow(tag):
     title = header.find("a")
     title = title and title.get_text()
     year = header.find("span", **{"class":"lister-item-year text-muted unbold"})
-    year = year and year.get_text().split()[-1][1:5]
+    year = year and year.get_text().split()
+    year = (year or None) and year[-1][1:5]
     runtime = tag.find("span", **{"class":"runtime"})
     runtime = runtime and runtime.get_text()[:-4]
     genre = tag.find("span", **{"class":"genre"})
     genre = genre and genre.get_text().strip()
     imdb_rating = tag.find("strong")
     imdb_rating = imdb_rating and imdb_rating.get_text()
-    metacritic_rating = tag.find("span", **{"class":"metascore  mixed"})
-    metacritic_rating = metacritic_rating and metacritic_rating.get_text()
+    metacritic_rating = tag.find("div", **{"class":"inline-block ratings-metascore"})
+    metacritic_rating = metacritic_rating and metacritic_rating.find("span").get_text()
     crew_query = tag.find(lambda x: "Director:" in x.previous_element) or tag.find(lambda x: "Stars:" in x.previous_element)
     if crew_query:
         crew_query = [s.strip() for s in crew_query.parent.get_text().split("\n")]
@@ -78,7 +79,7 @@ if not os.path.exists('output/'):
 
 # Figure out what is left to scrape
 generated_csvs = [f for f in os.listdir('./output/') if f[-4:] == ".csv"]
-starting_year = 1982
+starting_year = 1978
 ending_year = datetime.datetime.now().year
 seen_years = {int(f[:-4]) for f in generated_csvs}
 all_years = set(range(starting_year, ending_year + 1))
@@ -86,9 +87,9 @@ years_to_collect = all_years - seen_years
 
 for year in years_to_collect:
     base_url = "https://www.imdb.com/search/title"
-    next = "?title_type=feature&release_date={0}-01-01,{0}-12-31&sort=release_date,asc&countries=us".format(year)
+    next = "?year={0}&title_type=feature&sort=release_date,asc".format(year)
     context = ssl._create_unverified_context()
-    data = []
+    data = [["title", "year", "runtime", "genres", "imdb_rating", "metacritic_rating", "directors", "cast", "numvotes"]]
     while next:
         src = urllib.request.urlopen(base_url + next, context=context).read()
         soup = BeautifulSoup(src, 'html.parser')
