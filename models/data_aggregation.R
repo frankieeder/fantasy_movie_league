@@ -2,92 +2,75 @@
 # Objective : TODO
 # Created by: frankieeder
 # Created on: 7/7/18
-install.packages(c("stringr", "data.table"), repos = "http://cran.us.r-project.org")
+
+# Libraries
+library(plyr)
 library(stringr)
 library(data.table)
-dirs.BOM <- list.dirs(path = "../data/BoxOfficeMojo/output/", full.names = TRUE, recursive = TRUE)
+library(onehot)
 
-
-
-
-# Establish known Keyword Mappings
-keyword.implication.mappings <- {list(
-  `online` = list(
-    channelType = "online"
-  ),
-  `offline` = list(
-    channelType = "offline"
-  ),
-  `tv` = list(
-    channel = "tv"
-  ),
-  `display` = list(
-    channel = "display"
-  ),
-  `retargeting` = list(
-    campaignStrategy = "retargeting"
-  ),
-  `search` = list(
-    campaignStrategy = "search"
-  ),
-  `15` = list(
-    spotType = "15"
-  ),
-  `30` = list(
-    spotType = "30"
-  ),
-  `60` = list(
-    spotType = "60"
-  ),
-  `post` = list(
-    spotType = "post"
-  ),
-  `pre` = list(
-    spotType = "pre"
-  ),
-  `facebook` = list(
-    publisher = "facebook",
-    channel = "display"
-  ),
-  `instagram` = list(
-    publisher = "instagram"
-  ),
-  `hulu` = list(
-    publisher = "hulu"
-  ),
-  `carryOver` = list(
-    responseType = "carryOver"
-  ),
-  `saturation` = list(
-    responseType = "saturation"
-  ),
-  `gross` = list(
-    grossOrNet = "gross"
-  ),
-  `net` = list(
-    grossOrNet = "net"
-  ),
-  `groupon_grossbookings` = list(
-    kpi = "grossbookings"
-  )
-)}
-
-# Find all known keywords that might show up in model. Important for error catching and future scalability
-implicationKeywords <- unlist(lapply(names(keyword.implication.mappings), function (x) str_split(x, pattern = "[|]")))
-subKPIstoIgnore <- c("clicks")
-uniqueKPIs <- union(historical.responses$kpi, daily.responses$kpi)
-dummyKeywords <- c("all")
-keywordsAccountedFor <- unique(c(implicationKeywords, subKPIstoIgnore, dummyKeywords, uniqueKPIs))
-
-# Check in case there are new keywords. We must establish additional mappings if any are not yet accounted for. TODO: Update this!!!
-uniqueChannelNames <- unique(historical.responses$rawchannelname)
-uniqueKeywords <- unique(Reduce(c, strsplit(uniqueChannelNames, split = "_")))
-unaccountedKeywords <- setdiff(uniqueKeywords, keywordsAccountedFor)
-if (length(unaccountedKeywords) > 0) {
-  stop(paste0("There are keywords unaccounted for. Place the following keyword mappings in the top of r script: \n", paste(unaccountedKeywords, collapse = ", ")))
+replace.vals.dt = function(dt, filter, replacement, cols.to.replace = names(dt)) {
+  for (col in cols.to.replace)
+    dt[filter(get(col)), (col) := replacement]
+  
+  return(dt)
 }
 
-# Perform keyword implication mappings ----------------------------------- TODO: Figure out what to do with this...
+parse.digit <- function (str) {
+  as.numeric(gsub("[^0-9-]", "", str))
+}
+
+# Pull and format scraped data
+BOM.dirs <- list.files(path = "./data/BoxOfficeMojo/output", full.names = T)
+BOM.tables <- lapply(BOM.dirs, read.csv)
+BOM.dt <- data.table(do.call(what = rbind.fill, args = BOM.tables))
+names(BOM.dt)[names(BOM.dt) == "Title..click.to.view."] = "Title"
+setkey(BOM.dt, Title)
+BOM.dt.clean <- replace.vals.dt(BOM.dt, function (x) x == "-", NA)
+
+
+IMDb.dirs <- list.files(path = "./data/IMDb/output", full.names = T)
+IMDb.tables <- lapply(IMDb.dirs, read.csv)
+IMDb.dt <- data.table(do.call(what = rbind.fill, args = IMDb.tables))
+setkey(IMDb.dt, title)
+
+# Check for missing IMDb results
+title.intersect <- intersect(BOM.dt[, Title], IMDb.dt[, title])
+not.in.IMDb <- setdiff(BOM.dt[, Title], IMDb.dt[, title])
+bad.BOM <- BOM.dt[not.in.IMDb]
+unique.BOM <- unique(BOM.dt[, Title])
+
+# Merge data
+movie.dt <- merge(
+  BOM.dt, 
+  IMDb.dt, 
+  by.x = key(BOM.dt), 
+  by.y = key(IMDb.dt)
+)
+
+numeric.cols <- c("Weekend.Gross", "TW")
+BOM.dt.clean <- BOM.dt.clean[ , (cols) := lapply(.SD, parse.digit), .SDcols = ]
+
+make.true.mappings <- function (keywords) {
+  mappings <- lapply(keywords, function (x) setNames(list(T), x))
+  names(mappings) <- keywords
+  mappings
+}
+
+# Make Genre Mappings
+all.genres <- data.table(table(unlist(str_split(movie.dt$genres, pattern = ", "))))
+good.genres <- all.genres[N > 100 & V1 != "", V1]
+mappings.genre <- make.true.mappings(good.genres)
+
+all.cast <- data.table(table(unlist(str_split(IMDb.dt$cast, pattern = ", "))))
+good.cast <- all.cast[N > 15 & V1 != "", V1]
+
+all.directors <- data.table(table(unlist(str_split(IMDb.dt$directors, pattern = ", "))))
+good.directors <- all.directors[N > 2 & V1 != "", V1]
+
+movie.explanatory.df <- movie.dt[, .(TW, Studio, )]
+
+
 map.keyword.implications <- function(dt, mappings, search.by = names(dt), fixed = F, useBytes = F) {
   # Uses mappings, a list structure containing knowledge about the implications of certain keywords, and populates a data.table
   # row by row accordingly.
@@ -126,3 +109,10 @@ map.keyword.implications <- function(dt, mappings, search.by = names(dt), fixed 
   #cat("\n")
   dt
 }
+
+populated.movie.dt <- map.keyword.implications(
+  dt = movie.dt,
+  mappings = mappings.genre,
+  search.by = "genres",
+  fixed = T
+)
