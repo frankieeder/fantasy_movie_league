@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from models.utils import *
 import os
 import re
 from models.metascraping import *
@@ -8,12 +9,6 @@ import itertools
 
 pd.set_option('display.max_rows', 50)
 pd.set_option('display.max_columns', 500)
-
-def parse_digit(string):
-    return float(re.sub("[^0-9.-]", "", string)) if isinstance(string, str) else string
-
-def replace_list(list, val, replacement):
-    return [(replacement if i == val else i) for i in list]
 
 cwd = os.getcwd()
 BOM_path = "../data/BoxOfficeMojo/output"

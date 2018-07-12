@@ -1,10 +1,13 @@
 # TODO: FIX THIS AND MAKE IT PART OF A PACKAGE PROBABLY AND FIX DIRECTORY PATHS
-import pickle
-import os
 from selenium import webdriver
-from statistics import mean
 from functools import reduce
 from bs4 import BeautifulSoup
+from models.utils import *
+import pickle
+import os
+import urllib.request
+import re
+import ssl
 
 
 class MemoizeToFile:
@@ -29,7 +32,7 @@ class MemoizeToFile:
         
     def updateAll(self, save=True):
         for key in self.memo:
-            self.get(key, update=True)
+            self(key, update=True)
         if save:
             self.save()
 
@@ -39,88 +42,161 @@ class MemoizeToFile:
         with open(output_file, 'wb') as output:
             pickle.dump(self.memo, output, pickle.HIGHEST_PROTOCOL)
 
-driver = webdriver.Chrome()
+def merge_dicts(*dict_args):
+    """
+    Given any number of dicts, shallow copy and merge into a new dict,
+    precedence goes to key value pairs in latter dicts.
+    """
+    result = {}
+    for dictionary in dict_args:
+        result.update(dictionary)
+    return result
 
-def search_LB(query, first_result=True):
-    pass
 
-def search_imdb(query, first_result=True, querytype=None):
-    driver.get("https://www.imdb.com/")
-    dropdown = driver.find_element_by_class_name("quicksearch_dropdown")
-    if querytype:
-        query_type_selection = dropdown.find_element_by_css_selector("[value = '%a']" % querytype)
-        query_type_selection.click()
-    search = driver.find_element_by_id("navbar-query")
-    search.send_keys(query)
-    submit = driver.find_element_by_id("navbar-submit-button")
-    submit.click()
-    if first_result:
-        results = driver.find_element_by_class_name("findList")
-        first_result = results.find_element_by_xpath("//td[2]").find_element_by_tag_name("a")
-        first_result.click()
-
-def search_tmdb(query, first_result=True):
-    pass
-
-def maximize_dicts(dicts):
+def apply_dicts_keywise(dicts, f, default):
     max_dict = {}
     all_keys = reduce(lambda x, y: x | y, [set(d.keys()) for d in dicts])
     for key in all_keys:
-        max_dict[key] = max((d[key] if (key in d) else 0) for d in dicts)
+        max_dict[key] = f((d[key] if (key in d) else default) for d in dicts)
     return max_dict
 
+# SEARCHERS
+def search_imdb(query, first_result=True, query_type=None):
+    formatted_query = query.lower().replace(" ", "+")
+    query_type = query_type if query_type else "all"
+    search_page = "https://www.imdb.com/find?q={0}&s={1}".format(formatted_query, query_type)
+    if first_result:
+        driver = webdriver.Chrome()
+        driver.get(search_page)
+        results = driver.find_element_by_class_name("findList")
+        first_result = results.find_element_by_xpath("//td[2]").find_element_by_tag_name("a")
+        first_result.click()
+        finish_url = driver.current_url
+        driver.close()
+        return finish_url
+    return search_page
 
-def scrape_imdb_person():
+def search_lb(query, first_result=True, query_type=""):
+    formatted_query = query.lower().replace(" ", "+")
+    search_page = "https://letterboxd.com/search/{0}/{1}/".format(query_type, formatted_query)
+    if first_result:
+        driver = webdriver.Chrome()
+        driver.get(search_page)
+        first_result = driver.find_element_by_class_name('search-result').find_element_by_tag_name("a")
+        first_result.click()
+        finish_url = driver.current_url
+        driver.close()
+        return finish_url
+    return search_page
+
+def search_tmdb(query, first_result=True):
+    formatted_query = query.lower().replace(" ", "+")
+    search_page = "https://www.themoviedb.org/search?query={0}".format(formatted_query)
+    if first_result:
+        driver = webdriver.Chrome()
+        driver.get(search_page)
+        first_result = driver.find_element_by_class_name("item").find_element_by_tag_name("a")
+        first_result.click()
+        finish_url = driver.current_url
+        driver.close()
+        return finish_url
+    return search_page
+
+
+# PAGE SCRAPERS
+def scrape_imdb_person(url):
     """Defines how to scrape data once we are on an imdb person main page."""
-    soup = BeautifulSoup(driver.pagesource, "html.parser")
-    filmography = driver.find_element_by_id("filmography")
-    filmo_headers = filmography.find_elements_by_class_name("head")
-    filmo_header_titles = [e.find_element_by_tag_name("a").text for e in filmo_headers]
-    filmo_sections = filmography.find_elements_by_class_name("filmo-category-section")
-    filmo_section_counts = [len(s.find_elements_by_tag_name("div")) for s in filmo_sections]
-    credits = {t: c for t, c in zip(filmo_header_titles, filmo_section_counts)}
-    return credits
+    base_url = re.search(".*/", url)[0]
+    context = ssl._create_unverified_context()
+    src = urllib.request.urlopen(base_url, context=context).read()
+    soup = BeautifulSoup(src, "html.parser")
+
+    filmography = soup.find(id="filmography")
+    filmo_headers = filmography.find_all(**{'class': "head"})
+    filmo_header_titles = [e.find("a").text for e in filmo_headers]
+    filmo_sections = filmography.find_all(**{'class': "filmo-category-section"})
+    filmo_section_counts = [len(s.find_all("div")) for s in filmo_sections]
+    filmography_counts = {t: c for t, c in zip(filmo_header_titles, filmo_section_counts)}
+
+    awards = scrape_imdb_person_awards(base_url + "awards/")
+
+    meta = {}
+    max_star_rank = 10000
+    star_rank = soup.find("div",id="prometer_container").find("a").text
+    if star_rank == "Top 500":
+        meta["star_rank"] = max_star_rank - 500
+    elif star_rank == "Top 5000":
+        meta["star_rank"] = max_star_rank - 5000
+    elif star_rank == "SEE RANK":
+        pass
+    else:
+        meta["star_rank"] = max_star_rank - int(star_rank)
+    # TODO: Could add more analysis here, number of photos and videos?
+    return merge_dicts(filmography_counts, awards, meta)
+
+def scrape_imdb_person_awards(url):
+    """Defines how to scrape data once we are on an imdb person awards page."""
+    base_url = re.search(".*/", url)[0]
+    context = ssl._create_unverified_context()
+    src = urllib.request.urlopen(base_url, context=context).read()
+    soup = BeautifulSoup(src, "html.parser")
+
+    results = {}
+    award_count_string = soup.find("div", class_="desc").text
+    if award_count_string:
+        award_count_words = award_count_string.split()
+        results["num_wins"] = int(award_count_words[2])
+        results["num_noms"] = int(award_count_words[5])
+        results["win_nom_ratio"] = results["num_wins"] / results["num_noms"]
+    return results
+
+def scrape_lb_studio_using_search_results(url):
+    context = ssl._create_unverified_context()
+    src = urllib.request.urlopen(url, context=context).read()
+    soup = BeautifulSoup(src, "html.parser")
+    first_result = soup.find("li", class_="search-result")
+    first_result_metadata = first_result.find("p", class_="film-metadata")
+    first_result_meta_string = first_result_metadata.contents[0]
+    num_movies = int(re.search("[0-9]+", first_result_meta_string)[0])
+    return {"num_movies": num_movies}
+
+def scrape_tmdb_title(url):
+    context = ssl._create_unverified_context()
+    src = urllib.request.urlopen(url, context=context).read()
+    soup = BeautifulSoup(src, "html.parser")
+
+    budget_header = soup.find("bdi",string="Budget")
+    budget = parse_digit(budget_header.parent.next_sibling)
+    return {"budget": budget}
 
 
-def get_person_score(person):
-    search_imdb(person, first_result=True, querytype='nm')
-    return scrape_imdb_person_filmography()
-get_person_score = MemoizeToFile(get_person_score, file="./get_person_score.pkl")
+# GETTERS (combine search and scrape functions)
+def get_imdb_person_data(person):
+    try:
+        person_url = search_imdb(person, first_result=True, query_type='nm')
+        return scrape_imdb_person(person_url)
+    except Exception as e:
+        return {}
+get_imdb_person_data = MemoizeToFile(get_imdb_person_data, file="./get_imdb_person_data.pkl")
+
+def get_imdb_people_data(people):
+    return apply_dicts_keywise([get_imdb_person_data(d) for d in people.split(", ")], max, 0)
 
 
-def get_person_scores(persons):
-    return maximize_dicts([get_person_score(d) for d in persons.split(", ")])
+def get_lb_studio_data(studio):
+    studio_url = search_lb(studio, first_result=False, query_type="studios")
+    return scrape_lb_studio_using_search_results(studio_url)
+get_lb_studio_data = MemoizeToFile(get_lb_studio_data, file="./get_lb_studio_data.pkl")
 
+def get_studios_data(studios):
+    return apply_dicts_keywise([get_lb_studio_data(s) for s in studios.split(", ")], max, 0)
 
-def get_studio_score(studio):
-    driver = webdriver.Chrome()
-    base_url = "https://pro.imdb.com"
-    driver.get("https://pro.imdb.com/company/co0390816/")
-    driver.get("https://pro.imdb.com/company/co0390816/")
-    # Get to correct page
-    search = driver.find_element_by_id("searchField")
-    search.send_keys(studio)
-    results_field = driver.find_element_by_id("instantSearch")
-    results = results_field.find_elements_by_tag_name("li")
-    driver.implicitly_wait(1)
-    soup = BeautifulSoup(results_field.get_attribute('innerHTML'), 'html.parser')
-    companies_title = soup.find("span", string="Companies")
-    first_company_result = companies_title.parent.nextSibling
-    first_company = first_company_result.find("a")["href"]
-    driver.get(base_url + first_company)
-    # Once on new page:
-    lower_box = driver.find_element_by_class_name("a-box-inner")
-    soup = BeautifulSoup(lower_box.get_attribute('innerHTML'), 'html.parser')
-    num_title_text = soup.find("span", **{'class':'a-size-mini a-color-secondary tab_subheading'})
-
-    driver.close()
-    return None
+def get_title_data_tmdb(title):
+    movie_url = search_tmdb(title)
+    return scrape_tmdb_title(movie_url)
+get_title_data_tmdb = MemoizeToFile(get_title_data_tmdb, file="./get_title_data_tmdb.pkl")
 
 
 
-# get_studio_score("Warner Bros")
 
 
-def get_studio_scores(studios):
-    # TODO: This might not work...?
-    return mean(get_studio_score(s)**3 for s in studios.split(", "))

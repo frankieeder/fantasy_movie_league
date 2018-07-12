@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f95700da-8aad-4c4b-9a26-ba4344564dfc" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/models/data_aggregation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/metascraping.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/data_aggregation.R" beforeDir="false" afterPath="$PROJECT_DIR$/models/data_aggregation.R" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/data_aggregation.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/data_aggregation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/metascraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/metascraping.py" afterDir="false" />
     </list>
     <ignored path="venv/" />
     <ignored path="data/BoxOfficeMojo/output/" />
@@ -31,11 +30,8 @@
       <file leaf-file-name="IMDb_data_scraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="97" column="78" lean-forward="true" selection-start-line="97" selection-start-column="39" selection-end-line="97" selection-end-column="78" />
-              <folding>
-                <element signature="e#0#46#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -43,20 +39,17 @@
       <file leaf-file-name="data_aggregation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/data_aggregation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-275">
-              <caret line="18" column="41" lean-forward="true" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="30">
+              <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pydevd.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="1663" selection-start-line="1663" selection-end-line="1663" />
+            <state relative-caret-position="15">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -64,11 +57,14 @@
       <file leaf-file-name="metascraping.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/metascraping.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="72" column="25" lean-forward="true" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
+            <state relative-caret-position="150">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
-                <element signature="e#80#93#0" expanded="true" />
-                <element signature="e#130#973#0" />
+                <element signature="e#81#111#0" expanded="true" />
+                <element signature="e#1828#2412#0" />
+                <element signature="e#1844#2322#0" />
+                <element signature="e#3455#4733#0" />
+                <element signature="e#4775#5419#0" />
               </folding>
             </state>
           </provider>
@@ -77,17 +73,8 @@
       <file leaf-file-name="errorhandler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
+            <state relative-caret-position="352">
               <caret line="241" selection-start-line="241" selection-end-line="241" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="webdriver.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="407" column="11" lean-forward="true" selection-start-line="407" selection-start-column="11" selection-end-line="407" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -109,6 +96,17 @@
       <find>output_file</find>
       <find>self.data</find>
       <find>director</find>
+      <find>urllib</find>
+      <find>person_url</find>
+      <find>maximize</find>
+      <find>webdriver</find>
+      <find>selenium.webdriver</find>
+      <find>actor_ranking</find>
+      <find>css</find>
+      <find>submit</find>
+      <find>search</find>
+      <find>get_person_data</find>
+      <find>get_studio_data</find>
       <find>BOM</find>
     </findStrings>
     <replaceStrings>
@@ -116,6 +114,12 @@
       <replace>key</replace>
       <replace>self.memo</replace>
       <replace>person</replace>
+      <replace>url</replace>
+      <replace>selenium.webdriver</replace>
+      <replace>webdriver</replace>
+      <replace>star_rank</replace>
+      <replace>get_imdb_people_data</replace>
+      <replace>get_lb_studio_data</replace>
       <replace>IMDb</replace>
     </replaceStrings>
   </component>
@@ -135,6 +139,7 @@
         <option value="$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py" />
         <option value="$PROJECT_DIR$/models/director_scraper.py" />
         <option value="$PROJECT_DIR$/models/MemoizeToFile.py" />
+        <option value="$PROJECT_DIR$/models/utils.py" />
         <option value="$PROJECT_DIR$/models/data_aggregation.py" />
         <option value="$PROJECT_DIR$/models/metascraping.py" />
       </list>
@@ -209,7 +214,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.data_aggregation">
+  <component name="RunManager" selected="Python.metascraping">
     <configuration name="IMDb_data_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="fantasy_movie_league" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -297,8 +302,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.data_aggregation" />
         <item itemvalue="Python.metascraping" />
+        <item itemvalue="Python.data_aggregation" />
         <item itemvalue="Python.IMDb_data_scraper" />
         <item itemvalue="R.data_aggregation" />
         <item itemvalue="Python.data_scraper" />
@@ -351,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531007857013</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Starting additional metascraping testing. Some working functions, but need serious structural reconfiguration.">
+      <created>1531418208229</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1531418208229</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -388,7 +400,8 @@
     <MESSAGE value="Should have working IMDb data scraper!" />
     <MESSAGE value="More bug fixes with IMDb puller" />
     <MESSAGE value="Changed to include movies outside the US, also fixed some more minor bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed to include movies outside the US, also fixed some more minor bugs" />
+    <MESSAGE value="Starting additional metascraping testing. Some working functions, but need serious structural reconfiguration." />
+    <option name="LAST_COMMIT_MESSAGE" value="Starting additional metascraping testing. Some working functions, but need serious structural reconfiguration." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -400,11 +413,11 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/models/data_aggregation.py</url>
-          <line>8</line>
+          <line>9</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="154" />
+      <option name="time" value="180" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -424,9 +437,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1365">
           <caret line="97" column="48" lean-forward="true" selection-start-line="97" selection-start-column="48" selection-end-line="97" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -511,27 +521,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="407" column="11" lean-forward="true" selection-start-line="407" selection-start-column="11" selection-end-line="407" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="241" selection-start-line="241" selection-end-line="241" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/new_week.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -546,33 +535,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/data_aggregation.py">
+    <entry file="file://$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-275">
-          <caret line="18" column="41" lean-forward="true" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/IMDb/IMDb_data_scraper.py">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="97" column="78" lean-forward="true" selection-start-line="97" selection-start-column="39" selection-end-line="97" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="320">
+          <caret line="407" column="11" lean-forward="true" selection-start-line="407" selection-start-column="11" selection-end-line="407" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="241" selection-start-line="241" selection-end-line="241" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/data_aggregation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/metascraping.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="72" column="25" lean-forward="true" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
+        <state relative-caret-position="150">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
-            <element signature="e#80#93#0" expanded="true" />
-            <element signature="e#130#973#0" />
+            <element signature="e#81#111#0" expanded="true" />
+            <element signature="e#1828#2412#0" />
+            <element signature="e#1844#2322#0" />
+            <element signature="e#3455#4733#0" />
+            <element signature="e#4775#5419#0" />
           </folding>
         </state>
       </provider>
