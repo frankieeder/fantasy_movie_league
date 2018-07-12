@@ -17,6 +17,7 @@ replace.vals.dt = function(dt, filter, replacement, cols.to.replace = names(dt))
 }
 
 parse.digit <- function (str) {
+  # Simple function to take a string and return the digits in it, accounting for decimals and negatives.
   as.numeric(gsub("[^0-9.-]", "", str))
 }
 
@@ -28,18 +29,19 @@ BOM.dt <- data.table(do.call(what = rbind.fill, args = BOM.tables))
 names(BOM.dt)[names(BOM.dt) == "Title..click.to.view."] = "Title"
 setkey(BOM.dt, Title)
 
-IMDb.dirs <- list.files(path = "./data/IMDb/output", full.names = T)
+IMDb.dirs <- list.files(path = "./data/IMDb/output", full.names = T, include.dirs = F)
 IMDb.tables <- lapply(IMDb.dirs, read.csv)
 IMDb.dt <- data.table(do.call(what = rbind.fill, args = IMDb.tables))
 setkey(IMDb.dt, title)
 
-# Check for missing IMDb results
+# Check data quantities
 title.intersect <- intersect(BOM.dt[, Title], IMDb.dt[, title])
 not.in.IMDb <- setdiff(BOM.dt[, Title], IMDb.dt[, title])
 bad.BOM <- BOM.dt[not.in.IMDb]
 unique.BOM <- unique(BOM.dt[, Title])
 
-one.hot.encode <- function(dt, search.cols, thresholds, split.pattern = ", ", drop.originals = T) {
+# Format tables and one-hot encode
+one.hot.encode <- function(dt, search.cols, thresholds = rep(0, length(search.cols)), split.pattern = ", ", drop.originals = T) {
   for (i in 1:length(search.cols)) {
     this.search.col <- search.cols[i]
     this.threshold <- thresholds[i]
@@ -55,7 +57,6 @@ one.hot.encode <- function(dt, search.cols, thresholds, split.pattern = ", ", dr
   dt
 }
 
-
 # Merge data
 movie.dt <- merge(
   BOM.dt, 
@@ -68,10 +69,12 @@ categorical.cols <- c("Studio", "genres", "directors")
 numeric.cols <- setdiff(good.cols, categorical.cols)
 
 movie.dt <- movie.dt[, ..good.cols]
-movie.dt[ , (numeric.cols) := lapply(.SD, parse.digit), .SDcols = numeric.cols]
 movie.dt <- replace.vals.dt(movie.dt, function (x) x == "-", NA)
 movie.dt <- replace.vals.dt(movie.dt, function (x) x == "", NA)
+movie.dt[ , (numeric.cols) := lapply(.SD, parse.digit), .SDcols = numeric.cols]
 
 # One hot encoding might have problems here since we have joined the table and the counts of each genre might be too large. This actually could be helpful as well though as it might increase counts for movies that were successful at the box office.
-movie.dt <- one.hot.encode(movie.dt, categorical.cols, thresholds = c(100, 10, 20)) 
+movie.dt <- one.hot.encode(movie.dt, categorical.cols, thresholds = c(100, 10, 20))
+
+
 

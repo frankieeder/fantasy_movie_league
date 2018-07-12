@@ -3,6 +3,7 @@ import urllib.request
 import csv
 import os
 import ssl
+import sys
 import datetime
 from bisect import bisect_left
 
@@ -87,10 +88,11 @@ years_to_collect = all_years - seen_years
 
 for year in years_to_collect:
     base_url = "https://www.imdb.com/search/title"
-    next = "?year={0}&title_type=feature&sort=release_date,asc".format(year)
+    next = "?year={0}&title_type=feature&moviemeter=1,10000".format(year)
     context = ssl._create_unverified_context()
     data = [["title", "year", "runtime", "genres", "imdb_rating", "metacritic_rating", "directors", "cast", "numvotes"]]
     while next:
+        print("\rCollecting year {0} from url {1}".format(year, next), end='')
         src = urllib.request.urlopen(base_url + next, context=context).read()
         soup = BeautifulSoup(src, 'html.parser')
         results = soup.find_all("div", **{'class':'lister-item mode-advanced'})
