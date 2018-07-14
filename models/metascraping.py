@@ -1,8 +1,8 @@
-# TODO: FIX THIS AND MAKE IT PART OF A PACKAGE PROBABLY AND FIX DIRECTORY PATHS
 from selenium import webdriver
 from functools import reduce
 from bs4 import BeautifulSoup
 from models.utils import *
+from pandas import isnull
 import pickle
 import os
 import urllib.request
@@ -62,18 +62,22 @@ def apply_dicts_keywise(dicts, f, default):
 
 # SEARCHERS
 def search_imdb(query, first_result=True, query_type=None):
+    base_url = "https://www.imdb.com"
     formatted_query = query.lower().replace(" ", "+")
     query_type = query_type if query_type else "all"
     search_page = "https://www.imdb.com/find?q={0}&s={1}".format(formatted_query, query_type)
     if first_result:
-        driver = webdriver.Chrome()
-        driver.get(search_page)
-        results = driver.find_element_by_class_name("findList")
-        first_result = results.find_element_by_xpath("//td[2]").find_element_by_tag_name("a")
-        first_result.click()
-        finish_url = driver.current_url
-        driver.close()
-        return finish_url
+        context = ssl._create_unverified_context()
+        src = urllib.request.urlopen(search_page, context=context).read()
+        soup = BeautifulSoup(src, "html.parser")
+        results = soup.find(class_="findList")
+        first_result = results.find_all("td")[1].find("a", href=True)['href']
+        #results = driver.find_element_by_class_name("findList")
+        #first_result = results.find_element_by_xpath("//td[2]").find_element_by_tag_name("a")
+        #first_result.click()
+        #finish_url = driver.current_url
+        #driver.close()
+        return base_url + first_result
     return search_page
 
 def search_lb(query, first_result=True, query_type=""):
@@ -90,16 +94,15 @@ def search_lb(query, first_result=True, query_type=""):
     return search_page
 
 def search_tmdb(query, first_result=True):
+    base_url = "https://www.themoviedb.org"
     formatted_query = query.lower().replace(" ", "+")
     search_page = "https://www.themoviedb.org/search?query={0}".format(formatted_query)
     if first_result:
-        driver = webdriver.Chrome()
-        driver.get(search_page)
-        first_result = driver.find_element_by_class_name("item").find_element_by_tag_name("a")
-        first_result.click()
-        finish_url = driver.current_url
-        driver.close()
-        return finish_url
+        context = ssl._create_unverified_context()
+        src = urllib.request.urlopen(search_page, context=context).read()
+        soup = BeautifulSoup(src, "html.parser")
+        first_result = soup.find(class_="item").find("a", href=True)['href']
+        return base_url + first_result
     return search_page
 
 
@@ -166,7 +169,7 @@ def scrape_tmdb_title(url):
     soup = BeautifulSoup(src, "html.parser")
 
     budget_header = soup.find("bdi",string="Budget")
-    budget = parse_digit(budget_header.parent.next_sibling)
+    budget = parse_digit(budget_header.parent.next_sibling, float)
     return {"budget": budget}
 
 
@@ -180,7 +183,7 @@ def get_imdb_person_data(person):
 get_imdb_person_data = MemoizeToFile(get_imdb_person_data, file="./get_imdb_person_data.pkl")
 
 def get_imdb_people_data(people):
-    return apply_dicts_keywise([get_imdb_person_data(d) for d in people.split(", ")], max, 0)
+    return {} if isnull(people) else apply_dicts_keywise([get_imdb_person_data(d) for d in people.split(", ")], max, 0)
 
 
 def get_lb_studio_data(studio):

@@ -5,31 +5,8 @@ import os
 import ssl
 import sys
 import datetime
-from bisect import bisect_left
+from models.utils import split_list, writeTable
 
-def split_list(iterable, splitters):
-    splitters = set(splitters)
-    lists = []
-    this_list = []
-    for elem in iterable:
-        if elem in splitters:
-            if len(this_list) > 0:
-                lists.append(this_list)
-                this_list = []
-            continue
-        else:
-            this_list.append(elem)
-    return lists
-
-def writeTable(table, filename):
-    """Writes table to csv.
-    :param table: The table to write (should be indexed by rows then columns)
-    :param filename: The directory to write the csv to
-    :return: None
-    """
-    with open(filename, "w") as output:
-        writer = csv.writer(output, lineterminator='\n')
-        writer.writerows(table)
 def getText(item):
     return item.get_text() if item else None
 
