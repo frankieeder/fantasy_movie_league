@@ -3,6 +3,7 @@ import urllib.request
 import csv
 import re
 import os
+import pandas as pd
 
 def getYears():
     """Finds years that have weekend chart results.
@@ -106,9 +107,13 @@ for year, week in weekends_to_collect:
 
     # Parse, trim and format table
     data = parseTable(chart)[:-1]
-    data[0][6:7] = ["Theater Count", "Theater Change"]  # fix weird formatting edge case
+    df = pd.DataFrame(data[1:])
+    data[0][6:7] = ["Theater Count", "Theater Change"] # fix weird formatting edge case
+    df.columns = data[0]
+    df['year'] = year
+    df['week'] = week
 
     # Write data to csv
     csvfile = "./output/" + " | ".join((yr_id, wknd_id, dates)) + ".csv"
-    writeTable(data, csvfile)
+    df.to_csv(csvfile, index=False)
 

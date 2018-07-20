@@ -1,13 +1,13 @@
-from selenium import webdriver
 from functools import reduce
 from bs4 import BeautifulSoup
-from models.utils import *
-from pandas import isnull
+import pandas as pd
 import pickle
 import os
 import urllib.request
 import re
 import ssl
+from lxml.html.soupparser import fromstring
+import json
 
 
 class MemoizeToFile:
@@ -40,7 +40,14 @@ class MemoizeToFile:
         if not output_file:
             output_file = self.file
         with open(output_file, 'wb') as output:
-            pickle.dump(self.memo, output, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.memo, output, 2)
+
+    def process(self, *args):
+        for a in args:
+            self(a, update=True)
+
+    def dt(self):
+        return pd.DataFrame.from_dict(data = self.memo, orient = "index")
 
 def merge_dicts(*dict_args):
     """
@@ -84,7 +91,7 @@ def search_lb(query, first_result=True, query_type=""):
     formatted_query = query.lower().replace(" ", "+")
     search_page = "https://letterboxd.com/search/{0}/{1}/".format(query_type, formatted_query)
     if first_result:
-        driver = webdriver.Chrome()
+        #driver = webdriver.Chrome()
         driver.get(search_page)
         first_result = driver.find_element_by_class_name('search-result').find_element_by_tag_name("a")
         first_result.click()
@@ -115,11 +122,11 @@ def scrape_imdb_person(url):
     soup = BeautifulSoup(src, "html.parser")
 
     filmography = soup.find(id="filmography")
-    filmo_headers = filmography.find_all(**{'class': "head"})
-    filmo_header_titles = [e.find("a").text for e in filmo_headers]
-    filmo_sections = filmography.find_all(**{'class': "filmo-category-section"})
-    filmo_section_counts = [len(s.find_all("div")) for s in filmo_sections]
-    filmography_counts = {t: c for t, c in zip(filmo_header_titles, filmo_section_counts)}
+    filmo_headers = filmography.find_all(class_="head")
+    filmo_header_texts = [e.find("a") for e in filmo_headers]
+    filmo_titles = [e.text for e in filmo_header_texts]
+    filmo_counts = [e.next_sibling[2:-10] for e in filmo_header_texts]
+    filmography_counts = {t: c for t, c in zip(filmo_titles, filmo_counts)}
 
     awards = scrape_imdb_person_awards(base_url + "awards/")
 
@@ -153,6 +160,31 @@ def scrape_imdb_person_awards(url):
         results["win_nom_ratio"] = results["num_wins"] / results["num_noms"]
     return results
 
+def scrape_imdb_title(url):
+    base_url = re.search(".*/", url)[0]
+    context = ssl._create_unverified_context()
+    src = urllib.request.urlopen(base_url, context=context).read()
+    pg = fromstring(src)
+    data = {}
+    xpaths = {
+        'actual_title': '//meta[@property="og:title"]/@content',
+        'imdb_rating': '//div[@class="imdbRating"]//span[@itemprop="ratingValue"]/text()',
+        'metacritic_rating': '//div[contains(@class,"metacriticScore")]/span/text()',
+        'directors': '//div[@class="plot_summary_wrapper"]//span[@itemprop="director"]/a/span/text()',
+        'writers': '//div[@class="plot_summary_wrapper"]//span[@itemprop="creator"]/a/span/text()',
+        'actors': '//div[@class="plot_summary_wrapper"]//span[@itemprop="actors"]/a/span/text()',
+        'genres': '//h4[contains(text(), "Genres:")]/../a/text()',
+        'runtime': '//h4[contains(text(), "Runtime:")]/following-sibling::time/text()',
+        'budget': '//h4[contains(text(), "Budget:")]/following-sibling::text()[1]',
+        'studios': '//h4[contains(text(), "Production Co:")]/../span/a/span/text()'
+    }
+    for key in xpaths:
+        try:
+            data[key] = ", ".join(pg.xpath(xpaths[key]))
+        except Exception:
+            pass
+    return data
+
 def scrape_lb_studio_using_search_results(url):
     context = ssl._create_unverified_context()
     src = urllib.request.urlopen(url, context=context).read()
@@ -174,16 +206,19 @@ def scrape_tmdb_title(url):
 
 
 # GETTERS (combine search and scrape functions)
+def get_imdb_title_data(title):
+    title_url = search_imdb(title, first_result=True, query_type='tt')
+    return scrape_imdb_title(title_url)
+get_imdb_title_data = MemoizeToFile(get_imdb_title_data, file = "./imdb_title_data.pkl")
+
 def get_imdb_person_data(person):
-    try:
-        person_url = search_imdb(person, first_result=True, query_type='nm')
-        return scrape_imdb_person(person_url)
-    except Exception as e:
-        return {}
-get_imdb_person_data = MemoizeToFile(get_imdb_person_data, file="./get_imdb_person_data.pkl")
+    person_url = search_imdb(person, first_result=True, query_type='nm')
+    return scrape_imdb_person(person_url)
+
+get_imdb_person_data = MemoizeToFile(get_imdb_person_data, file="./imdb_person_data.pkl")
 
 def get_imdb_people_data(people):
-    return {} if isnull(people) else apply_dicts_keywise([get_imdb_person_data(d) for d in people.split(", ")], max, 0)
+    return {} if pd.isnull(people) else apply_dicts_keywise([get_imdb_person_data(d) for d in people.split(", ")], max, 0)
 
 
 def get_lb_studio_data(studio):
@@ -194,12 +229,10 @@ get_lb_studio_data = MemoizeToFile(get_lb_studio_data, file="./get_lb_studio_dat
 def get_studios_data(studios):
     return apply_dicts_keywise([get_lb_studio_data(s) for s in studios.split(", ")], max, 0)
 
-def get_title_data_tmdb(title):
+def get_tmbb_title_data(title):
     movie_url = search_tmdb(title)
     return scrape_tmdb_title(movie_url)
-get_title_data_tmdb = MemoizeToFile(get_title_data_tmdb, file="./get_title_data_tmdb.pkl")
-
-
+get_tmbb_title_data = MemoizeToFile(get_tmbb_title_data, file="./tmbb_title_data.pkl")
 
 
 

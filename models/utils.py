@@ -38,7 +38,7 @@ def writeTable(table, filename):
         writer.writerows(table)
 
 
-def parse_digit(string, caster=float):
+def parse_digit(string, caster):
     """Parses the digits of a string, and casts them using input caster.
     :param string: Input string to parse for digits
     :param caster: Input function used to cast parsed string (e.g. int, float, or str). Defaults to float.
@@ -71,3 +71,9 @@ def function_results_to_df(iterable, f, input_name="", sep="_"):
 
 def one_hot_encode(str, sep=", "):
     return {} if pd.isnull(str) else {k: 1 for k in str.split(sep)}
+
+def apply_to_df(df, f, columns = None):
+    if not columns:
+        columns = df.columns
+    for column in columns:
+        df[column] = [f(e) for e in df[column]]
