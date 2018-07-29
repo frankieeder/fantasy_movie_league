@@ -1,13 +1,36 @@
 import pandas as pd
 import numpy as np
-from xgboost import XGBRegressor
+from xgboost import *
 from models.utils import *
 import sklearn
 import os
 import pickle
 
-pulled_data = pd.read_csv('./modeling_data.csv', index_col=0)
-apply_to_df(pulled_data, lambda x: parse_digit(x, caster=int), columns=["bom_Theater Change"]) # TODO: THIS SHOULD BE UNECESSARY???
+pulled_data = pd.read_csv('./modeling_data3.csv', index_col=0)
+#apply_to_df(pulled_data, lambda x: parse_digit(x, caster=int), columns=["bom_Theater Change"]) # TODO: THIS SHOULD BE UNECESSARY???
+pulled_data = pulled_data.drop(['bom_title', 'bom_Total Gross', 'tmdb_id', 'tmdb_title'], 1)
+
+
+xgb_data = DMatrix(
+    data=pulled_data.drop(['bom_Weekend Gross'], axis = 1),
+    label=pulled_data['bom_Weekend Gross'],
+    silent=False,
+    feature_names=list(pulled_data.columns)[1:]
+)
+
+model = cv(
+    params={
+        'objective': 'reg:linear',
+        'eta': 0.35,
+        'max_depth': 20,
+    },
+    dtrain=xgb_data,
+    num_boost_round=50,
+    nfold=4,
+    as_pandas=True,
+    verbose_eval=True,
+    shuffle=True
+)
 
 test_percentage = .05
 random_seed = 0
