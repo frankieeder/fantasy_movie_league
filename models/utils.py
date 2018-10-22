@@ -1,11 +1,69 @@
 import re
 import pandas as pd
+import os
 import csv
-from math import isnan
-import models.metascraping as ms
+import pickle
+import ssl
+import urllib
 
-def print_status(*args):
-    print('\r' + " ".join(args), end='')
+UNVERIFIED_CONTEXT = ssl._create_unverified_context()
+
+class Memoizer:
+    def __init__(self, func, file):
+        self.f = func
+        self.file = file
+        if os.path.isfile(file):
+            with open(file, 'rb') as input_stream:
+                self.memo = pickle.load(input_stream)
+        else:
+            self.memo = dict()
+
+    def __call__(self, key, update=False, save=True):
+        if not update and key in self.memo:
+            return self.memo[key]
+        else:
+            value = self.f(key)
+            self.memo[key] = value
+            if save:
+                self.save()
+            return value
+
+    def save(self, output_file=None):
+        if not output_file:
+            output_file = self.file
+        with open(output_file, 'wb') as output:
+            pickle.dump(self.memo, output, 2)
+
+    def dict(self, iterable, update=False, save_at_end=False):
+        remaining = iterable if update else set(iterable) - set(self.memo)
+        data = {}
+        for c, k in enumerate(remaining):
+            print_status("Processing remaining input {0} out of {1} ({2} Total)".format(c, len(remaining), len(iterable)))
+            data[k] = self(k, update=True, save=(not save_at_end))
+        if save_at_end:
+            self.save()
+        return {k: self(k) for k in iterable}
+
+    def process(self, *args, **kwargs):
+        self.dict(*args, **kwargs)
+
+    def historical_dict(self):
+        return self.memo
+
+    def df(self, *args, **kwargs):
+        data = self.dict(*args, **kwargs)
+        return pd.DataFrame.from_dict(data=data, orient="index")
+
+    def historical_df(self):
+        return pd.DataFrame.from_dict(data=self.historical_dict(), orient="index")
+
+def memoizeToFile(file):
+    return lambda func: Memoizer(func, file)
+
+
+
+def print_status(*args, sep = " "):
+    print('\r' + sep.join(args), end='')
 
 def split_list(iterable, splitters):
     """Splits the input iterable into a list of lists at each occurrence of anything in splitters.
@@ -56,24 +114,37 @@ def replace_list(iterable, mappings):
     """
     return [(mappings[k] if (k in mappings) else k) for k in iterable]
 
-
-def function_results_to_df(iterable, f, input_name="", sep="_"):
-    df = pd.DataFrame()
-    for counter, elem in enumerate(iterable):
-        print_status("Processing Row {0} out of {1}".format(counter, len(iterable)))
-        if input_name:
-            df.loc[counter, input_name] = elem
-        results = f(elem)
-        for key in results:
-            df.loc[counter, input_name + sep + key] = results[key]
+def one_hot_encode(keys, values, split_func):
+    one_hot_encoder = lambda x: {k: 1 for k in split_func(x)}
+    data = {k: one_hot_encoder(v) for k, v in zip(keys, values)}
+    df = pd.DataFrame.from_dict(data, orient='index')
+    df = df.fillna(0)
     return df
 
-
-def one_hot_encode(str, sep=", "):
-    return {} if pd.isnull(str) else {k: 1 for k in str.split(sep)}
-
 def apply_to_df(df, f, columns = None):
+    """MIGHT BE DELETABLE"""
     if not columns:
         columns = df.columns
     for column in columns:
         df[column] = [f(e) for e in df[column]]
+
+
+def clean_query(query):
+    return urllib.parse.quote_plus(query)
+
+def merge_dicts(*dict_args):
+    """
+    Given any number of dicts, shallow copy and merge into a new dict,
+    precedence goes to key value pairs in latter dicts.
+    """
+    result = {}
+    for dictionary in dict_args:
+        result.update(dictionary)
+    return result
+
+def apply_dicts_keywise(dicts, f, default):
+    max_dict = {}
+    all_keys = reduce(lambda x, y: x | y, [set(d.keys()) for d in dicts])
+    for key in all_keys:
+        max_dict[key] = f((d[key] if (key in d) else default) for d in dicts)
+    return max_dict

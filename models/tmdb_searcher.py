@@ -3,6 +3,8 @@ import json
 import urllib
 import pandas as pd
 
+SIG = "GET\u0000[URL]\u0000[BODY]"
+
 API_KEY = "abd17a9f250807b76ebbfa9997ca6ade"
 TMDB_API_BASE = "https://api.themoviedb.org/3/"
 
