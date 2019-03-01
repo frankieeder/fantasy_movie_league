@@ -105,7 +105,12 @@ FML_RAW = """"How to Train Your Dragon: The Hidden World" - $32.2 million
 "Glass" - $842,000
 "Spider-Man: Into the Spider-Verse" - $643,000"""
 
-BOR_RAW = """1	How to Train Your Dragon: The Hidden World
+BOR_RAW = """Film (Distributor)	Weekend
+Gross	Total
+Gross	%
+Change	Week
+#
+1	How to Train Your Dragon: The Hidden World
 (Universal / DreamWorks Animation)	$30.0 M	$98.0 M	-45%	2
 2	Tyler Perry's A Madea Family Funeral
 (Lionsgate)	$22.0 M	$22.0 M	NEW	1

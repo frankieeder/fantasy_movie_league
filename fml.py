@@ -134,20 +134,12 @@ class BOR_Projections(ProjectionSet):
         in order to handle new errors that arise as the structures of the input
         string change with each week and as I work with new websites.
         """
+        #rows = string.split("\n")
+
         #remove up to "#"
-        curr = ""
-        while curr != "#":
-            curr = string[0]
-            string = string[1:]
+        string = string[string.find('#') + 1:]
         #parse into individual elements
-        elems = []
-        while len(string) > 0:
-            elem = ""
-            string = string[1:]
-            while len(string) > 0 and string[0] != "\n" and string[0] != "\t":
-                elem += string[0]
-                string = string[1:]
-            elems.append(elem)
+        elems = re.split("\n|\t", string)
         #parse into (movie title, projected earning) pairs
         movies = []
         while len(elems) > 1:
